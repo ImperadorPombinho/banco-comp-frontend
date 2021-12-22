@@ -3,6 +3,7 @@ import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import Pagando from "../../../assets/images/pagando.png"
 import Botao from "../../components/Botao";
+import TelaLogin from "../TelaLogin";
 
 
 const TelaEntrarCadastar = ({entrarCadastrar}) => {
@@ -16,7 +17,7 @@ const TelaEntrarCadastar = ({entrarCadastrar}) => {
             </View>
             
             <View style={estilos.botaoconfig}>
-                <Botao style={[estilos.estiloBotao, estilos.textoBotao]} >{entrarCadastrar.entrar}</Botao>
+                <Botao evento={() => {console.log("Ola")}} style={[estilos.estiloBotao, estilos.textoBotao]} >{entrarCadastrar.entrar}</Botao>
                 <Botao style={[estilos.estiloBotao, estilos.textoBotao]} >{entrarCadastrar.cadastrar}</Botao>
             </View>
 
