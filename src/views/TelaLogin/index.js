@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Image, StyleSheet, TextInput, View, Text, KeyboardAvoidingView, ScrollView } from "react-native";
 import LogoApp from "../../../assets/images/logoAppBanco.png";
 import { Platform } from "react-native";
 import Botao from "../../components/Botao";
 import { Box, Center, FormControl, Input, NativeBaseProvider, Stack } from "native-base";
 import TelaEntrarCadastar from "../TelaEntrarCadastrar";
-
+import { useForm } from "react-hook-form";
 const TelaLogin = ({inputs, telaEntrarCadastrar}) => {
+    const {register, setValue, handleSubmit} = useForm();
+
+    useEffect(() => {
+        register('email')
+        register('senha')
+    }, [register]);
+
     return(
         <>
         
