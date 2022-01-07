@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
-import { Image, StyleSheet, TextInput, View, Text, KeyboardAvoidingView, ScrollView } from "react-native";
+import { Image, StyleSheet, View, KeyboardAvoidingView, ScrollView } from "react-native";
 import LogoApp from "../../../assets/images/logoAppBanco.png";
 import { Platform } from "react-native";
 import Botao from "../../components/Botao";
-import { Box, Center, FormControl, Input, NativeBaseProvider, Stack } from "native-base";
-import TelaEntrarCadastar from "../TelaEntrarCadastrar";
 import { useForm } from "react-hook-form";
+import TextField from "../../components/TextField";
 const TelaLogin = ({inputs, telaEntrarCadastrar}) => {
     const {register, setValue, handleSubmit} = useForm();
 
@@ -22,49 +21,22 @@ const TelaLogin = ({inputs, telaEntrarCadastrar}) => {
         behavior={Platform.OS == "ios" ? "padding" : "height"}
         >
                 <ScrollView>
-
-                
-                    <NativeBaseProvider
-                    >
-                        
-                        <Center>
-                            <Center
-                            height={350}
-                            width={{
-                                base: 350,
-                                lg: 500
-                            }}
-                            
-                            style={estilos.caixaLogin}
-                            >
-                                <FormControl>
-                                        <Center>
-                                            <Stack space={60}>    
-                                            <Box>
-                                            <Text style={estilos.textoLabel}>{inputs.labelEmail}</Text>
-                                                <Input 
-                                                size="lg" 
-                                                variant="rounded" 
-                                                style={estilos.inputConfig}
-                                                type="text"
-                                                />
-                                            </Box>
-                                            <Box>
-                                            <Text style={estilos.textoLabel}>{inputs.labelSenha}</Text>
-                                            <Input 
-                                            style={estilos.inputConfig} 
-                                            size="lg" variant="rounded" 
-                                            type="password"
-                                            />
-                                            </Box>
-                                            <Text style={estilos.textoEsqueceu}>{inputs.labelEsqueceu}</Text>
-                                            </Stack>
-                                        </Center>
-
-                                </FormControl>
-                            </Center>
-                        </Center>
-                    </NativeBaseProvider>
+                    <View style={estilos.configCaixaLogin}>       
+                        <View style={estilos.caixaLogin}>
+                            <TextField 
+                            label={inputs.labelEmail}
+                            estiloLabel={estilos.textoLabel}
+                            placeholder={inputs.labelEmail}
+                            />
+                            <TextField
+                            secureTextEntry 
+                            label={inputs.labelSenha}
+                            estiloLabel={estilos.textoLabel}
+                            placeholder={inputs.labelSenha}
+                            />
+                        </View>
+                    </View>
+                    
                 </ScrollView>
             </KeyboardAvoidingView>
             <View style={estilos.caixaBotao}>
@@ -81,13 +53,25 @@ const estilos = StyleSheet.create({
         height: 320,
         position: 'relative'
     },
+    configCaixaLogin: {
+        height: 400,
+        width: "100%",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center"
+    },
     caixaLogin: {
         backgroundColor: "#E6E6E6", 
-        borderRadius: 30
+        borderRadius: 30,
+        flexDirection: "column",
+        justifyContent: "space-evenly",
+        alignItems: "center",
+        height: 350,
+        width: 360
         
     },
     textoLabel: {
-        fontSize: 15,
+        fontSize: 16,
         lineHeight: 18,
         paddingLeft: 15,
         marginBottom: 10,
@@ -109,7 +93,7 @@ const estilos = StyleSheet.create({
     },
     caixaBotao: {
         width: "100%",
-        height: "20%",
+        height: "15.5%",
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center'
