@@ -36,8 +36,7 @@ const estilos = StyleSheet.create({
         borderWidth: 1,
         width: "100%",
         height: 50,
-        textAlign: "center",
-        color: "black"
+        textAlign: "center"
     },
     inputError:{
         borderRadius: 30,
