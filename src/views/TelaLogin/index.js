@@ -5,13 +5,34 @@ import { Platform } from "react-native";
 import Botao from "../../components/Botao";
 import { useForm } from "react-hook-form";
 import TextField from "../../components/TextField";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup"
+
+const validacaoLoginSchema = yup.object().shape({
+    email: yup
+    .string()
+    .required('Email é obrigátorio')
+    .email('Email tem que ser valido'),
+    senha: yup
+    .string()
+    .required('senha é obrigatoria')
+    .min(6, 'senha tem que ter no minimo 6 digitos')
+    .max(72, 'senha tem que ter no maximo 72 digitos')
+})
 const TelaLogin = ({inputs, telaEntrarCadastrar}) => {
-    const {register, setValue, handleSubmit} = useForm();
+    const {register, setValue, handleSubmit, formState: {errors}} = useForm({resolver: yupResolver(validacaoLoginSchema)});
+
 
     useEffect(() => {
         register('email')
         register('senha')
     }, [register]);
+
+
+    function aoEnviar(data){
+        console.log(data.email);
+        console.log(data.senha);
+    }
 
     return(
         <>
@@ -25,14 +46,18 @@ const TelaLogin = ({inputs, telaEntrarCadastrar}) => {
                         <View style={estilos.caixaLogin}>
                             <TextField 
                             label={inputs.labelEmail}
+                            error={errors?.email}
                             estiloLabel={estilos.textoLabel}
                             placeholder={inputs.labelEmail}
+                            onChangeText={text => setValue('email', text)}
                             />
                             <TextField
-                            secureTextEntry 
+                            secureTextEntry
+                            error={errors?.senha} 
                             label={inputs.labelSenha}
                             estiloLabel={estilos.textoLabel}
                             placeholder={inputs.labelSenha}
+                            onChangeText={text => setValue('senha', text)}
                             />
                         </View>
                     </View>
@@ -40,7 +65,7 @@ const TelaLogin = ({inputs, telaEntrarCadastrar}) => {
                 </ScrollView>
             </KeyboardAvoidingView>
             <View style={estilos.caixaBotao}>
-                <Botao style={[estilos.botao, estilos.textoBotao]} evento={() => {console.log("Ola")}} >{inputs.labelBotao}</Botao>
+                <Botao style={[estilos.botao, estilos.textoBotao]} evento={handleSubmit(aoEnviar)} >{inputs.labelBotao}</Botao>
             </View>
             
         </>

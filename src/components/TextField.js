@@ -3,7 +3,7 @@ import { StyleSheet, Text, TextInput, View } from "react-native";
 
 
 const TextField = ({error, label, estiloLabel, ...propsInput}) => {
-    const estiloInput = estilos.input
+    let estiloInput = estilos.input
     if(error){
         estiloInput = estilos.inputError
     }
@@ -36,19 +36,22 @@ const estilos = StyleSheet.create({
         borderWidth: 1,
         width: "100%",
         height: 50,
-        textAlign: "center"
+        paddingHorizontal: 10
     },
     inputError:{
         borderRadius: 30,
         backgroundColor: "#A6C2AB",
         borderColor: "rgba(200, 0, 55, 0.65)",
-        borderWidth: 1
+        borderWidth: 1,
+        width: "100%",
+        height: 50,
+        paddingHorizontal: 10
     },
     errorMessage: {
         fontSize: 15,
-        fontWeight: "bold",
-        lineHeight: 10,
-        color: "rgba(210, 0, 40, 0.4)"
+        color: "rgba(210, 0, 40, 0.75)",
+        marginTop: 15,
+        textAlign: "center"
     }
 });
 
