@@ -8,6 +8,11 @@ import { useFonts, ReemKufi_400Regular } from '@expo-google-fonts/reem-kufi';
 import { Roboto_400Regular } from '@expo-google-fonts/roboto';
 import AppLoading from 'expo-app-loading';
 import TelaLogin from './src/views/TelaLogin';
+import {NavigationContainer} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+
+const RotaPilha = createNativeStackNavigator();
 
 export default function App() {
   const [fonteCarregada] = useFonts({
@@ -18,13 +23,26 @@ export default function App() {
     return <AppLoading />
   }
   return (
-    <View style={styles.tela}>
-        <StatusBar style="auto" />
-        <TelaLogin {...Login} telaEntrarCadastrar={EntrarCadastrar} />
-    </View>
+    
+    <NavigationContainer>
+      
+          <StatusBar style="auto" />
+          <RotaPilha.Navigator>
+          <RotaPilha.Screen 
+          name='EntrarCadastrar' 
+          component={TelaEntrarCadastar}  
+          initialParams={
+            {entrarCadastrar: EntrarCadastrar.entrarCadastrar, 
+            estiloTelaToda: styles.tela
+            }} 
+          options={{headerShown: false}}
+          />
+          </RotaPilha.Navigator>
+      
+    </NavigationContainer>
   );
 }
-
+// <TelaLogin {...Login} telaEntrarCadastrar={EntrarCadastrar} />
 const styles = StyleSheet.create({
   tela: {
     minHeight: "100%",

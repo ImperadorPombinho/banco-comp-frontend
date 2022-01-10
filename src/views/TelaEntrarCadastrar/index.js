@@ -6,9 +6,11 @@ import Botao from "../../components/Botao";
 import TelaLogin from "../TelaLogin";
 
 
-const TelaEntrarCadastar = ({entrarCadastrar}) => {
+const TelaEntrarCadastar = ({route, navigation}) => {
+
+    const {entrarCadastrar, estiloTelaToda}  = route.params;
     return(
-        <>
+        <View style={estiloTelaToda}>
             <View style={estilos.divImagem}>
                 <Image source={Pagando} style={estilos.imagem} />
             </View>
@@ -23,7 +25,7 @@ const TelaEntrarCadastar = ({entrarCadastrar}) => {
 
             
             
-        </>
+        </View>
 
         
 
