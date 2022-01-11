@@ -19,9 +19,9 @@ const validacaoLoginSchema = yup.object().shape({
     .min(6, 'senha tem que ter no minimo 6 digitos')
     .max(72, 'senha tem que ter no maximo 72 digitos')
 })
-const TelaLogin = ({inputs, telaEntrarCadastrar}) => {
+const TelaLogin = ({route, navigation}) => {
     const {register, setValue, handleSubmit, formState: {errors}} = useForm({resolver: yupResolver(validacaoLoginSchema)});
-
+    const {inputs, estiloTelaToda} = route.params;
 
     useEffect(() => {
         register('email')
@@ -32,10 +32,14 @@ const TelaLogin = ({inputs, telaEntrarCadastrar}) => {
     function aoEnviar(data){
         console.log(data.email);
         console.log(data.senha);
+        const codigoHTTP = 200;
+        if(codigoHTTP === 200){
+            navigation.navigatr('Conta');
+        }
     }
 
     return(
-        <>
+        <View style={estiloTelaToda}>
         
         <Image style={estilos.imagem} source={LogoApp} />
         <KeyboardAvoidingView 
@@ -68,7 +72,7 @@ const TelaLogin = ({inputs, telaEntrarCadastrar}) => {
                 <Botao style={[estilos.botao, estilos.textoBotao]} evento={handleSubmit(aoEnviar)} >{inputs.labelBotao}</Botao>
             </View>
             
-        </>
+        </View>
     );
 }
 

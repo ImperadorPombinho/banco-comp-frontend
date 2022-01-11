@@ -29,7 +29,7 @@ export default function App() {
           <StatusBar style="auto" />
           <RotaPilha.Navigator>
           <RotaPilha.Screen 
-          name='EntrarCadastrar' 
+          name='Inicio' 
           component={TelaEntrarCadastar}  
           initialParams={
             {entrarCadastrar: EntrarCadastrar.entrarCadastrar, 
@@ -37,12 +37,27 @@ export default function App() {
             }} 
           options={{headerShown: false}}
           />
+          <RotaPilha.Screen 
+          name='Login'
+          component={TelaLogin}
+          initialParams={
+            {
+              inputs: Login.inputs,
+              estiloTelaToda: styles.tela
+            }
+            
+          }
+          options={
+            {
+              headerShown: false
+            }
+        }
+          />
           </RotaPilha.Navigator>
       
     </NavigationContainer>
   );
 }
-// <TelaLogin {...Login} telaEntrarCadastrar={EntrarCadastrar} />
 const styles = StyleSheet.create({
   tela: {
     minHeight: "100%",
