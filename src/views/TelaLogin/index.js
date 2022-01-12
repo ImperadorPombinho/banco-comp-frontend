@@ -34,7 +34,7 @@ const TelaLogin = ({route, navigation}) => {
         console.log(data.senha);
         const codigoHTTP = 200;
         if(codigoHTTP === 200){
-            navigation.navigatr('Conta');
+            navigation.navigate('Conta');
         }
     }
 

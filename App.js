@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import TelaEntrarCadastar from './src/views/TelaEntrarCadastrar';
 import EntrarCadastrar from './src/mocks/EntrarCadastrar';
 import Login from './src/mocks/Login';
@@ -10,6 +10,8 @@ import AppLoading from 'expo-app-loading';
 import TelaLogin from './src/views/TelaLogin';
 import {NavigationContainer} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import TelaCadastro from './src/views/TelaCadastrar';
+import Cadastro from './src/mocks/Cadastro';
 
 
 const RotaPilha = createNativeStackNavigator();
@@ -52,6 +54,22 @@ export default function App() {
               headerShown: false
             }
         }
+          />
+          <RotaPilha.Screen 
+          name='Cadastro'
+          component={TelaCadastro}
+          initialParams={{
+            estiloTela: styles.tela,
+            Cadastro: Cadastro
+          }}
+          options={{
+            headerTitleAlign: 'center',
+            headerTintColor: '#E6E6E6',
+            headerStyle: {
+              backgroundColor: '#2F942F'
+            }
+          }}
+        
           />
           </RotaPilha.Navigator>
       
