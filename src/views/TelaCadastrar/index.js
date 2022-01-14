@@ -6,15 +6,25 @@ import DadosConta from "./components/DadosConta";
 
 
 
+
 const TelaCadastro = ({route, navigation}) => {
     const [etapaAtual, setEtapaAtual] = useState(0);
+    const [objRespostas, setObjRespostas] = useState({});
     const {estiloTela, Cadastro} = route.params;
+
+    
 
     function proximaEtapa(){
         setEtapaAtual(etapaAtual + 1);
     }
     function voltarEtapa(){
         setEtapaAtual(etapaAtual - 1);
+    }
+    function guardarRespostas(dados){
+        setObjRespostas({...dados});
+        if(etapaAtual != listaFormulario.length - 1){
+            proximaEtapa();
+        }
     }
 
     const listaFormulario = [
@@ -25,6 +35,8 @@ const TelaCadastro = ({route, navigation}) => {
     estilos.botao ,
     estilos.textoBotao]} 
     conta={Cadastro.conta}
+    envio={guardarRespostas}
+    proximo={proximaEtapa}
     
     />
         ];

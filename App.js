@@ -27,7 +27,7 @@ export default function App() {
   return (
     
     <NavigationContainer>
-      
+          
           <StatusBar style="auto" />
           <RotaPilha.Navigator>
           <RotaPilha.Screen 

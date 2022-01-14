@@ -7,7 +7,7 @@ const TextField = ({error, label, estiloLabel, ...propsInput}) => {
     if(error){
         estiloInput = estilos.inputError
     }
-
+    
 
     return(
         <View style={estilos.caixaInput}>
