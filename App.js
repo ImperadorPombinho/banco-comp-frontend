@@ -12,6 +12,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import TelaCadastro from './src/views/TelaCadastrar';
 import Cadastro from './src/mocks/Cadastro';
+import validacoesGenericas from './src/contexts/validacoesGenericas';
+import { validarCidade, validarConfirmarSenha, validarCpf, validarEmail, validarEstado, validarIdade, validarNome, validarSenha } from './src/models/validacoes';
 
 
 const RotaPilha = createNativeStackNavigator();
@@ -27,9 +29,21 @@ export default function App() {
   return (
     
     <NavigationContainer>
-          
           <StatusBar style="auto" />
+          <validacoesGenericas.Provider value={{
+            email: validarEmail, 
+            cpf: validarCpf, 
+            senha: validarSenha, 
+            confirmar: validarConfirmarSenha,
+            cidade: validarCidade,
+            estado: validarEstado,
+            idade: validarIdade,
+            nome: validarNome,
+            sobrenome: validarNome
+            
+            }}>
           <RotaPilha.Navigator>
+          
           <RotaPilha.Screen 
           name='Inicio' 
           component={TelaEntrarCadastar}  
@@ -71,8 +85,9 @@ export default function App() {
           }}
         
           />
+          
           </RotaPilha.Navigator>
-      
+        </validacoesGenericas.Provider>
     </NavigationContainer>
   );
 }

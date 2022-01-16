@@ -1,7 +1,8 @@
 import { Box, Center, Flex, NativeBaseProvider, Progress, Spacer } from "native-base";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import TextField from "../../components/TextField";
+import DadosCliente from "./components/DadosCliente";
 import DadosConta from "./components/DadosConta";
 
 
@@ -10,18 +11,23 @@ import DadosConta from "./components/DadosConta";
 const TelaCadastro = ({route, navigation}) => {
     const [etapaAtual, setEtapaAtual] = useState(0);
     const [objRespostas, setObjRespostas] = useState({});
+    const [valorProgresso, setValorProgresso] = useState(0);
     const {estiloTela, Cadastro} = route.params;
 
-    
+    useEffect(() => {
+        console.log(objRespostas)
+    }, [objRespostas])
 
     function proximaEtapa(){
         setEtapaAtual(etapaAtual + 1);
+        setValorProgresso(valorProgresso + 50);
     }
     function voltarEtapa(){
         setEtapaAtual(etapaAtual - 1);
+        setValorProgresso(valorProgresso - 50);
     }
     function guardarRespostas(dados){
-        setObjRespostas({...dados});
+        setObjRespostas({...objRespostas, ...dados});
         if(etapaAtual != listaFormulario.length - 1){
             proximaEtapa();
         }
@@ -36,19 +42,28 @@ const TelaCadastro = ({route, navigation}) => {
     estilos.textoBotao]} 
     conta={Cadastro.conta}
     envio={guardarRespostas}
-    proximo={proximaEtapa}
     
+    />,
+    <DadosCliente estilos={[estilos.caixaLogin, 
+    estilos.titulo, 
+    estilos.labels, 
+    estilos.caixaBotao, 
+    estilos.botao ,
+    estilos.textoBotao]} 
+    cliente={Cadastro.cliente}
+    envio={guardarRespostas}
+    voltar={voltarEtapa}
+    
+
     />
         ];
     return(
         <View style={[estiloTela, estilos.tela]}>
                 <NativeBaseProvider>
-                    <Flex style={estilos.configProgress} >
-                               
+                    <Flex style={estilos.configProgress} >   
                             <Box w="50%" >
-                                <Progress size="md" colorScheme="emerald" value={0}/>
-                            </Box>
-                        
+                                <Progress size="md" colorScheme="emerald" value={valorProgresso}/>
+                            </Box>  
                     </Flex>
                 </NativeBaseProvider>
             
