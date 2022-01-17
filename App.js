@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import TelaEntrarCadastar from './src/views/TelaEntrarCadastrar';
 import EntrarCadastrar from './src/mocks/EntrarCadastrar';
 import Login from './src/mocks/Login';
@@ -10,6 +10,19 @@ import AppLoading from 'expo-app-loading';
 import TelaLogin from './src/views/TelaLogin';
 import {NavigationContainer} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import TelaCadastro from './src/views/TelaCadastrar';
+import Cadastro from './src/mocks/Cadastro';
+import validacoesGenericas from './src/contexts/validacoesGenericas';
+import { validarCidade, 
+  validarConfirmarSenha, 
+  validarCpf, 
+  validarEmail, 
+  validarEstado, 
+  validarIdade, 
+  validarNome, 
+  validarSenha, 
+  validarSobreNome} 
+  from './src/models/validacoes';
 
 
 const RotaPilha = createNativeStackNavigator();
@@ -25,9 +38,21 @@ export default function App() {
   return (
     
     <NavigationContainer>
-      
           <StatusBar style="auto" />
+          <validacoesGenericas.Provider value={{
+            email: validarEmail, 
+            cpf: validarCpf, 
+            senha: validarSenha, 
+            confirmar: validarConfirmarSenha,
+            cidade: validarCidade,
+            estado: validarEstado,
+            idade: validarIdade,
+            nome: validarNome,
+            sobrenome: validarSobreNome
+            
+            }}>
           <RotaPilha.Navigator>
+          
           <RotaPilha.Screen 
           name='Inicio' 
           component={TelaEntrarCadastar}  
@@ -53,8 +78,25 @@ export default function App() {
             }
         }
           />
+          <RotaPilha.Screen 
+          name='Cadastro'
+          component={TelaCadastro}
+          initialParams={{
+            estiloTela: styles.tela,
+            Cadastro: Cadastro
+          }}
+          options={{
+            headerTitleAlign: 'center',
+            headerTintColor: '#E6E6E6',
+            headerStyle: {
+              backgroundColor: '#2F942F'
+            }
+          }}
+        
+          />
+          
           </RotaPilha.Navigator>
-      
+        </validacoesGenericas.Provider>
     </NavigationContainer>
   );
 }

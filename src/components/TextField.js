@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 
 
-const TextField = ({error, label, estiloLabel, ...propsInput}) => {
+const TextField = ({ label, estiloLabel, error, ...propsInput}) => {
+
+
     let estiloInput = estilos.input
-    if(error){
+    if(!error.valido){
         estiloInput = estilos.inputError
     }
-
+    
 
     return(
         <View style={estilos.caixaInput}>
@@ -16,7 +18,7 @@ const TextField = ({error, label, estiloLabel, ...propsInput}) => {
             style={estiloInput}
             {...propsInput}
             />
-            {error ? <Text style={estilos.errorMessage}>{error.message}</Text> : null}
+            {!error.valido ? <Text style={estilos.errorMessage}>{error.textoAjuda}</Text> : null}
 
             
         </View>

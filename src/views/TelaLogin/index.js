@@ -1,41 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Image, StyleSheet, View, KeyboardAvoidingView, ScrollView } from "react-native";
 import LogoApp from "../../../assets/images/logoAppBanco.png";
 import { Platform } from "react-native";
 import Botao from "../../components/Botao";
-import { useForm } from "react-hook-form";
 import TextField from "../../components/TextField";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup"
+import validacoesGenericas from "../../contexts/validacoesGenericas";
+import useErro from "../../hooks/useErro";
 
-const validacaoLoginSchema = yup.object().shape({
-    email: yup
-    .string()
-    .required('Email é obrigátorio')
-    .email('Email tem que ser valido'),
-    senha: yup
-    .string()
-    .required('senha é obrigatoria')
-    .min(6, 'senha tem que ter no minimo 6 digitos')
-    .max(72, 'senha tem que ter no maximo 72 digitos')
-})
+
+
 const TelaLogin = ({route, navigation}) => {
-    const {register, setValue, handleSubmit, formState: {errors}} = useForm({resolver: yupResolver(validacaoLoginSchema)});
     const {inputs, estiloTelaToda} = route.params;
+    const [email, setEmail] = useState("");
+    const [senha, setSenha] = useState("");
 
-    useEffect(() => {
-        register('email')
-        register('senha')
-    }, [register]);
+    const validacoes = useContext(validacoesGenericas);
+
+    const [erro, validarCampo, possoEnviar] = useErro(validacoes);
 
 
-    function aoEnviar(data){
-        console.log(data.email);
-        console.log(data.senha);
-        const codigoHTTP = 200;
-        if(codigoHTTP === 200){
-            navigation.navigatr('Conta');
+    function aoEnviar(){
+        if(possoEnviar()){
+            const codigoHTTP = 200;
+            if(codigoHTTP === 200){
+                console.log("validacoes");
+            }
         }
+        
     }
 
     return(
@@ -43,25 +34,34 @@ const TelaLogin = ({route, navigation}) => {
         
         <Image style={estilos.imagem} source={LogoApp} />
         <KeyboardAvoidingView 
-        behavior={Platform.OS == "ios" ? "padding" : "height"}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
+
                 <ScrollView>
                     <View style={estilos.configCaixaLogin}>       
                         <View style={estilos.caixaLogin}>
                             <TextField 
                             label={inputs.labelEmail}
-                            error={errors?.email}
+                            onChangeText={text => setEmail(text)}
+                            onBlur={() => {
+                                validarCampo('email', email)
+                            }}
+                            error={erro.email}
                             estiloLabel={estilos.textoLabel}
                             placeholder={inputs.labelEmail}
-                            onChangeText={text => setValue('email', text)}
+                            
                             />
                             <TextField
                             secureTextEntry
-                            error={errors?.senha} 
+                            onChangeText={text => setSenha(text)}
+                            onBlur={() => {
+                                validarCampo('senha', senha)
+                            }}
+                            error={erro.senha}
                             label={inputs.labelSenha}
                             estiloLabel={estilos.textoLabel}
                             placeholder={inputs.labelSenha}
-                            onChangeText={text => setValue('senha', text)}
+                            
                             />
                         </View>
                     </View>
@@ -69,7 +69,7 @@ const TelaLogin = ({route, navigation}) => {
                 </ScrollView>
             </KeyboardAvoidingView>
             <View style={estilos.caixaBotao}>
-                <Botao style={[estilos.botao, estilos.textoBotao]} evento={handleSubmit(aoEnviar)} >{inputs.labelBotao}</Botao>
+                <Botao style={[estilos.botao, estilos.textoBotao]} evento={aoEnviar} >{inputs.labelBotao}</Botao>
             </View>
             
         </View>

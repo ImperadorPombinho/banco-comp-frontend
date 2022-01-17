@@ -20,7 +20,7 @@ const TelaEntrarCadastar = ({route, navigation}) => {
             
             <View style={estilos.botaoconfig}>
                 <Botao evento={() => {navigation.navigate('Login')}} style={[estilos.estiloBotao, estilos.textoBotao]} >{entrarCadastrar.entrar}</Botao>
-                <Botao style={[estilos.estiloBotao, estilos.textoBotao]} >{entrarCadastrar.cadastrar}</Botao>
+                <Botao evento={() => {navigation.navigate('Cadastro')}} style={[estilos.estiloBotao, estilos.textoBotao]} >{entrarCadastrar.cadastrar}</Botao>
             </View>
 
             
