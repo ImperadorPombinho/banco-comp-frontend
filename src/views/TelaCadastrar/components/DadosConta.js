@@ -7,15 +7,15 @@ import useErro from "../../../hooks/useErro";
 
 
 
-const DadosConta = ({estilos, conta, envio}) => {
+const DadosConta = ({estilos, conta, envio, json}) => {
     const caixaLogin = estilos[0];
     const titulo = estilos[1];
     const labels = estilos[2];
     const caixaBotao = estilos[3];
     const estiloBotao = [estilos[4], estilos[5]];
-    const [email, setEmail] = useState("");
-    const [senha, setSenha] = useState("");
-    const [confirmarSenha, setConfirmarSenha] = useState("");
+    const [email, setEmail] = useState(json.email);
+    const [senha, setSenha] = useState(json.senha);
+    const [confirmarSenha, setConfirmarSenha] = useState(json.confirmarSenha);
 
     const validacoes = useContext(validacoesGenericas);
 

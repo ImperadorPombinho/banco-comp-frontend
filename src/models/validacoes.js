@@ -206,6 +206,7 @@ function validarIdade(idade){
         valido: true,
         textoAjuda: ""
     }
+    idade = parseInt(idade)
 
     if(idade < 18){
         objResposta.valido = false;
@@ -215,4 +216,14 @@ function validarIdade(idade){
 }
 
 
-export {validarEmail, validarSenha, validarConfirmarSenha, validarCpf, validarCidade, validarEstado, validarIdade, validarNome, validarSobreNome}
+export {
+    validarEmail, 
+    validarSenha, 
+    validarConfirmarSenha, 
+    validarCpf, 
+    validarCidade, 
+    validarEstado, 
+    validarIdade, 
+    validarNome, 
+    validarSobreNome
+}

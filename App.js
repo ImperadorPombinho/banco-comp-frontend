@@ -13,7 +13,16 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import TelaCadastro from './src/views/TelaCadastrar';
 import Cadastro from './src/mocks/Cadastro';
 import validacoesGenericas from './src/contexts/validacoesGenericas';
-import { validarCidade, validarConfirmarSenha, validarCpf, validarEmail, validarEstado, validarIdade, validarNome, validarSenha } from './src/models/validacoes';
+import { validarCidade, 
+  validarConfirmarSenha, 
+  validarCpf, 
+  validarEmail, 
+  validarEstado, 
+  validarIdade, 
+  validarNome, 
+  validarSenha, 
+  validarSobreNome} 
+  from './src/models/validacoes';
 
 
 const RotaPilha = createNativeStackNavigator();
@@ -39,7 +48,7 @@ export default function App() {
             estado: validarEstado,
             idade: validarIdade,
             nome: validarNome,
-            sobrenome: validarNome
+            sobrenome: validarSobreNome
             
             }}>
           <RotaPilha.Navigator>

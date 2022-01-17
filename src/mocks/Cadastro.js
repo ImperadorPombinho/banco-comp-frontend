@@ -19,10 +19,9 @@ const Cadastro = {
         labelCidade: 'Cidade',
         labelEstado: 'Estado',
         labelIdade: 'Idade',
-        botaoProximo: 'Próximo',
+        botaoCadastrar: 'Cadastrar',
         botaoVoltar: 'Voltar'
-    },
-    progresso: 'Progresso'
+    }
     
 
 }

@@ -6,15 +6,15 @@ import validacoesGenericas from "../../../contexts/validacoesGenericas";
 import useErro from "../../../hooks/useErro";
 
 
-const DadosCliente = ({estilos, cliente, envio, voltar}) => {
+const DadosCliente = ({estilos, cliente, envio, voltar, json}) => {
     const caixaLogin = estilos[0];
     const titulo = estilos[1];
     const labels = estilos[2];
     const caixaBotao = estilos[3];
     const estiloBotao = [estilos[4], estilos[5]];
-    const [nome, setNome] = useState("");
-    const [sobrenome, setSobrenome] = useState("");
-    const [cpf, setCPF] = useState("");
+    const [nome, setNome] = useState(json.nome);
+    const [sobrenome, setSobrenome] = useState(json.sobrenome);
+    const [cpf, setCPF] = useState(json.cpf);
 
     const validacoes = useContext(validacoesGenericas);
 

@@ -1,16 +1,28 @@
 import { Box, Center, Flex, NativeBaseProvider, Progress, Spacer } from "native-base";
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, View } from "react-native";
 import TextField from "../../components/TextField";
 import DadosCliente from "./components/DadosCliente";
 import DadosConta from "./components/DadosConta";
+import DadosLocal from "./components/DadosLocal";
 
 
 
 
 const TelaCadastro = ({route, navigation}) => {
+    let obj = {
+        email: "",
+        senha: "",
+        confirmarSenha: "",
+        nome: "",
+        sobrenome: "",
+        cpf: "",
+        cidade: "",
+        estado: "",
+        idade: ""
+    }
     const [etapaAtual, setEtapaAtual] = useState(0);
-    const [objRespostas, setObjRespostas] = useState({});
+    const [objRespostas, setObjRespostas] = useState(obj);
     const [valorProgresso, setValorProgresso] = useState(0);
     const {estiloTela, Cadastro} = route.params;
 
@@ -32,6 +44,9 @@ const TelaCadastro = ({route, navigation}) => {
             proximaEtapa();
         }
     }
+    function soGuardar(dados){
+        setObjRespostas({...objRespostas, ...dados});
+    }
 
     const listaFormulario = [
     <DadosConta estilos={[estilos.caixaLogin, 
@@ -42,6 +57,7 @@ const TelaCadastro = ({route, navigation}) => {
     estilos.textoBotao]} 
     conta={Cadastro.conta}
     envio={guardarRespostas}
+    json={objRespostas}
     
     />,
     <DadosCliente estilos={[estilos.caixaLogin, 
@@ -53,8 +69,23 @@ const TelaCadastro = ({route, navigation}) => {
     cliente={Cadastro.cliente}
     envio={guardarRespostas}
     voltar={voltarEtapa}
+    json={objRespostas}
     
 
+    />,
+    <DadosLocal estilos={[estilos.caixaLogin, 
+    estilos.titulo, 
+    estilos.labels, 
+    estilos.caixaBotao, 
+    estilos.botao ,
+    estilos.textoBotao]} 
+    local={Cadastro.local}
+    envio={guardarRespostas}
+    volta={voltarEtapa}
+    json={objRespostas}
+    soGuardar={soGuardar}
+    
+    
     />
         ];
     return(
@@ -66,10 +97,10 @@ const TelaCadastro = ({route, navigation}) => {
                             </Box>  
                     </Flex>
                 </NativeBaseProvider>
-            
-            <View style={estilos.configCaixaLogin}>
-                {listaFormulario[etapaAtual]}
-            </View>
+           
+                <View style={estilos.configCaixaLogin}>
+                    {listaFormulario[etapaAtual]}
+                </View>
         </View>
     );
 

@@ -34,7 +34,7 @@ const TelaLogin = ({route, navigation}) => {
         
         <Image style={estilos.imagem} source={LogoApp} />
         <KeyboardAvoidingView 
-        behavior={Platform.OS == "ios" ? "padding" : "height"}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
 
                 <ScrollView>
