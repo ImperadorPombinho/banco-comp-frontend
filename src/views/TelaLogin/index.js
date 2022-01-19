@@ -23,7 +23,7 @@ const TelaLogin = ({route, navigation}) => {
         if(possoEnviar()){
             const codigoHTTP = 200;
             if(codigoHTTP === 200){
-                console.log("validacoes");
+                navigation.navigate('Funcoes')
             }
         }
         
