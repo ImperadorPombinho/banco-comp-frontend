@@ -23,9 +23,27 @@ import { validarCidade,
   validarSenha, 
   validarSobreNome} 
   from './src/models/validacoes';
-
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 
 const RotaPilha = createNativeStackNavigator();
+const NavBarBaixo = createBottomTabNavigator();
+
+
+const Inicio = ({route, navigation}) => {
+  const {estiloTela} = route.params;
+
+  return(
+    <NavBarBaixo.Navigator>
+
+
+    </NavBarBaixo.Navigator>
+  );
+
+}
+
+
+
+
 
 export default function App() {
   const [fonteCarregada] = useFonts({
@@ -93,6 +111,16 @@ export default function App() {
             }
           }}
         
+          />
+          <RotaPilha.Screen 
+          name='Inicio'
+          component={Inicio}
+          options={{
+            headerShown: false
+          }}
+          initialParams={{
+            estiloTela: styles.tela
+          }}
           />
           
           </RotaPilha.Navigator>
