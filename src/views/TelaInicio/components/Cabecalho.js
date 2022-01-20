@@ -23,8 +23,8 @@ const estilos = StyleSheet.create({
         alignItems: "center"
     },
     image:{
-        width: 50,
-        height: 60,
+        width: 60,
+        height: 65,
         marginTop: 30
     }
 })

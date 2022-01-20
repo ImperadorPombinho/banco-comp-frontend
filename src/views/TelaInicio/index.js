@@ -1,15 +1,16 @@
 import React from "react"; 
 import { Image, StyleSheet, Text, View } from "react-native";
 import Cabecalho from "./components/Cabecalho";
+import Titulo from "./components/Titulo";
 
 
 
 
 const TelaInicio = ({route, navigation}) => {
-    const {estiloTela} = route.params;
+    const {estiloTela, Saldo} = route.params;
     return(
         <View style={[estiloTela, estilos.tela]}>
-            <Cabecalho />
+            <Titulo  titulo={Saldo.titulo} subtitulo={Saldo.subtitulo}  />
         </View>
     );
 }

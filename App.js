@@ -25,6 +25,8 @@ import { validarCidade,
   from './src/models/validacoes';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import TelaInicio from './src/views/TelaInicio';
+import Cabecalho from './src/views/TelaInicio/components/Cabecalho';
+import Saldo from './src/mocks/Saldo';
 
 const RotaPilha = createNativeStackNavigator();
 const NavBarBaixo = createBottomTabNavigator();
@@ -38,8 +40,16 @@ const Inicio = ({route, navigation}) => {
       <NavBarBaixo.Screen  
       name='Saldo' 
       component={TelaInicio} 
-      initialParams={{estiloTela: estiloTela}} 
-      options={{headerShown: false}}
+      initialParams={{
+        estiloTela: estiloTela,
+        Saldo: Saldo
+      
+      }} 
+      options={{
+        header: (props) => (
+          <Cabecalho />
+        )
+      }}
       />
 
     </NavBarBaixo.Navigator>
