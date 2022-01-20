@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 import TelaEntrarCadastar from './src/views/TelaEntrarCadastrar';
 import EntrarCadastrar from './src/mocks/EntrarCadastrar';
 import Login from './src/mocks/Login';
@@ -27,6 +27,8 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import TelaInicio from './src/views/TelaInicio';
 import Cabecalho from './src/views/TelaInicio/components/Cabecalho';
 import Saldo from './src/mocks/Saldo';
+import IconSaldo from './assets/images/saldo.png'
+
 
 const RotaPilha = createNativeStackNavigator();
 const NavBarBaixo = createBottomTabNavigator();
@@ -48,7 +50,13 @@ const Inicio = ({route, navigation}) => {
       options={{
         header: (props) => (
           <Cabecalho />
-        )
+        ),
+        tabBarIcon: (props) => (<Image  source={IconSaldo} style={{
+          height: 30,
+          width: 30
+        }} />),
+        tabBarActiveTintColor: "#414141"
+
       }}
       />
 
